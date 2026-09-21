@@ -17,66 +17,159 @@ html {
 
 body {
   margin: 0;
+  min-height: 100vh;
+  overflow-x: hidden;
   font-family: Arial, sans-serif;
   color: white;
   text-align: center;
-  min-height: 100vh;
-  overflow-x: hidden;
 
   background: linear-gradient(
-    -45deg,
+    135deg,
+    #020617,
     #0f172a,
-    #172554,
-    #1e1b4b,
-    #0f172a
+    #1e1b4b
   );
-
-  background-size: 400% 400%;
-  animation: backgroundMove 12s ease infinite;
 }
 
-@keyframes backgroundMove {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
+/* Animated background glow */
+
+body::before,
+body::after {
+  content: "";
+  position: fixed;
+  width: 300px;
+  height: 300px;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+  z-index: -2;
 }
+
+body::before {
+  background: #3b82f6;
+  top: 5%;
+  left: -100px;
+  animation: float1 8s infinite alternate;
+}
+
+body::after {
+  background: #8b5cf6;
+  bottom: 5%;
+  right: -100px;
+  animation: float2 10s infinite alternate;
+}
+
+@keyframes float1 {
+  from { transform: translate(0,0); }
+  to { transform: translate(180px,120px); }
+}
+
+@keyframes float2 {
+  from { transform: translate(0,0); }
+  to { transform: translate(-150px,-100px); }
+}
+
+/* Particles */
+
+.particles {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: -1;
+}
+
+.particle {
+  position: absolute;
+  width: 4px;
+  height: 4px;
+  background: white;
+  border-radius: 50%;
+  opacity: 0.6;
+  animation: particleMove linear infinite;
+}
+
+@keyframes particleMove {
+  from {
+    transform: translateY(100vh);
+    opacity: 0;
+  }
+
+  20% {
+    opacity: 0.7;
+  }
+
+  80% {
+    opacity: 0.7;
+  }
+
+  to {
+    transform: translateY(-10vh);
+    opacity: 0;
+  }
+}
+
+/* Main */
 
 .container {
   width: 100%;
-  max-width: 700px;
+  max-width: 720px;
   margin: auto;
-  padding: 35px 18px;
+  padding: 40px 18px;
 }
 
+/* Glassmorphism */
+
 .profile {
-  background: rgba(255,255,255,0.09);
-  backdrop-filter: blur(10px);
   padding: 35px 25px;
-  border-radius: 25px;
-  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
+  border-radius: 28px;
+
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.20);
+
+  backdrop-filter: blur(18px);
+  -webkit-backdrop-filter: blur(18px);
+
+  box-shadow:
+    0 20px 60px rgba(0,0,0,0.45),
+    inset 0 1px 1px rgba(255,255,255,0.15);
 }
+
+/* Profile photo */
 
 img {
   width: 150px;
   height: 150px;
   object-fit: cover;
+
   border-radius: 50%;
-  border: 4px solid white;
+  border: 4px solid rgba(255,255,255,0.9);
+
+  box-shadow:
+    0 0 30px rgba(255,255,255,0.25);
 }
 
-/* Welcome typing animation */
+h1 {
+  font-size: 38px;
+  margin: 20px 0 8px;
+}
+
+/* Typing welcome */
 
 .welcome {
   color: #cbd5e1;
   font-size: 18px;
+
   white-space: nowrap;
   overflow: hidden;
+
   width: 0;
   margin: 10px auto;
+
   border-right: 2px solid white;
 
   animation:
-    typing 3s steps(24, end) forwards,
+    typing 3s steps(24,end) forwards,
     blink 0.7s step-end infinite;
 }
 
@@ -86,13 +179,12 @@ img {
 }
 
 @keyframes blink {
-  50% { border-color: transparent; }
+  50% {
+    border-color: transparent;
+  }
 }
 
-h1 {
-  font-size: 38px;
-  margin: 20px 0 5px;
-}
+/* Sections */
 
 section {
   margin-top: 35px;
@@ -100,6 +192,7 @@ section {
 
   opacity: 0;
   transform: translateY(30px);
+
   animation: slideUp 1s ease forwards;
 }
 
@@ -119,7 +212,7 @@ section:nth-of-type(3) {
 }
 
 h2 {
-  border-bottom: 2px solid #64748b;
+  border-bottom: 2px solid rgba(255,255,255,0.25);
   padding-bottom: 8px;
 }
 
@@ -127,14 +220,19 @@ li {
   margin: 12px 0;
 }
 
+/* Ambition glass card */
+
 .ambition {
-  background: rgba(255,255,255,0.08);
   padding: 18px;
-  border-radius: 15px;
+  border-radius: 18px;
+
+  background: rgba(255,255,255,0.08);
+  border: 1px solid rgba(255,255,255,0.12);
+
   line-height: 1.6;
 }
 
-/* Social Buttons */
+/* Social buttons */
 
 .social {
   margin-top: 30px;
@@ -142,44 +240,62 @@ li {
 
 .social a {
   display: inline-block;
+
   text-decoration: none;
   color: white;
-  background: rgba(255,255,255,0.12);
+
   padding: 12px 20px;
   margin: 6px;
-  border-radius: 12px;
+
+  border-radius: 14px;
+
+  background: rgba(255,255,255,0.10);
+  border: 1px solid rgba(255,255,255,0.18);
+
+  backdrop-filter: blur(10px);
+
   transition: 0.3s;
 }
 
 .social a:hover {
-  transform: translateY(-4px);
-  background: rgba(255,255,255,0.25);
+  transform: translateY(-5px) scale(1.03);
+  background: rgba(255,255,255,0.22);
 }
 
-/* Back to Top */
+/* Back to top */
 
 .top-button {
   position: fixed;
   right: 20px;
   bottom: 20px;
 
+  width: 48px;
+  height: 48px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
   text-decoration: none;
   color: white;
-  background: rgba(255,255,255,0.18);
 
-  padding: 12px 15px;
   border-radius: 50%;
 
-  font-size: 20px;
-  backdrop-filter: blur(8px);
+  background: rgba(255,255,255,0.12);
+  border: 1px solid rgba(255,255,255,0.2);
+
+  backdrop-filter: blur(12px);
+
+  font-size: 22px;
 
   transition: 0.3s;
 }
 
 .top-button:hover {
   transform: translateY(-5px);
-  background: rgba(255,255,255,0.3);
 }
+
+/* Footer */
 
 footer {
   margin-top: 30px;
@@ -197,7 +313,7 @@ footer {
 
   .profile {
     padding: 28px 18px;
-    border-radius: 20px;
+    border-radius: 22px;
   }
 
   img {
@@ -221,7 +337,26 @@ footer {
 </style>
 </head>
 
-<body id="top">
+<body>
+
+<!-- Particles -->
+
+<div class="particles">
+
+  <span class="particle" style="left:5%; animation-duration:9s;"></span>
+  <span class="particle" style="left:12%; animation-duration:12s;"></span>
+  <span class="particle" style="left:20%; animation-duration:8s;"></span>
+  <span class="particle" style="left:28%; animation-duration:14s;"></span>
+  <span class="particle" style="left:36%; animation-duration:10s;"></span>
+  <span class="particle" style="left:44%; animation-duration:13s;"></span>
+  <span class="particle" style="left:52%; animation-duration:9s;"></span>
+  <span class="particle" style="left:60%; animation-duration:11s;"></span>
+  <span class="particle" style="left:68%; animation-duration:15s;"></span>
+  <span class="particle" style="left:76%; animation-duration:10s;"></span>
+  <span class="particle" style="left:84%; animation-duration:13s;"></span>
+  <span class="particle" style="left:92%; animation-duration:8s;"></span>
+
+</div>
 
 <div class="container">
 
@@ -234,15 +369,18 @@ footer {
 <p class="welcome">Welcome to my profile!</p>
 
 <section>
+
 <h2>About Me</h2>
 
 <p>
 Hello! I'm Aswin. I am interested in technology,
 programming, artificial intelligence and learning new things.
 </p>
+
 </section>
 
 <section>
+
 <h2>My Skills 💻</h2>
 
 <ul>
@@ -250,14 +388,18 @@ programming, artificial intelligence and learning new things.
 <li>C++ Programming</li>
 <li>Learning New Technologies</li>
 </ul>
+
 </section>
 
 <section>
+
 <h2>My Ambition </h2>
 
 <div class="ambition">
+
 My ambition is to become an <b>AI Developer</b>
 and build useful AI technologies in the future.
+
 </div>
 
 </section>
