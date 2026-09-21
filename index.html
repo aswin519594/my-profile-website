@@ -11,25 +11,48 @@
   box-sizing: border-box;
 }
 
+html {
+  scroll-behavior: smooth;
+}
+
 body {
   margin: 0;
   font-family: Arial, sans-serif;
-  background: linear-gradient(135deg, #0f172a, #1e293b);
   color: white;
   text-align: center;
+  min-height: 100vh;
+  overflow-x: hidden;
+
+  background: linear-gradient(
+    -45deg,
+    #0f172a,
+    #172554,
+    #1e1b4b,
+    #0f172a
+  );
+  background-size: 400% 400%;
+  animation: backgroundMove 12s ease infinite;
+}
+
+@keyframes backgroundMove {
+  0% { background-position: 0% 50%; }
+  50% { background-position: 100% 50%; }
+  100% { background-position: 0% 50%; }
 }
 
 .container {
+  width: 100%;
   max-width: 700px;
-  margin: 50px auto;
-  padding: 35px 25px;
+  margin: auto;
+  padding: 35px 18px;
 }
 
 .profile {
-  background: rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.09);
+  backdrop-filter: blur(10px);
   padding: 35px 25px;
   border-radius: 25px;
-  box-shadow: 0 10px 35px rgba(0,0,0,0.35);
+  box-shadow: 0 10px 40px rgba(0,0,0,0.4);
 }
 
 img {
@@ -38,11 +61,12 @@ img {
   object-fit: cover;
   border-radius: 50%;
   border: 4px solid white;
+  box-shadow: 0 0 25px rgba(255,255,255,0.25);
 }
 
 h1 {
   font-size: 38px;
-  margin: 20px 0 5px;
+  margin: 20px 0 8px;
 }
 
 .tagline {
@@ -71,10 +95,68 @@ li {
   line-height: 1.6;
 }
 
+/* Social Buttons */
+
+.social {
+  margin-top: 30px;
+}
+
+.social a {
+  display: inline-block;
+  text-decoration: none;
+  color: white;
+  background: rgba(255,255,255,0.12);
+  padding: 12px 20px;
+  margin: 6px;
+  border-radius: 12px;
+  transition: 0.3s;
+}
+
+.social a:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.25);
+}
+
 footer {
   margin-top: 30px;
   color: #94a3b8;
   font-size: 14px;
+}
+
+/* Mobile */
+
+@media (max-width: 600px) {
+
+  .container {
+    padding: 20px 12px;
+  }
+
+  .profile {
+    padding: 28px 18px;
+    border-radius: 20px;
+  }
+
+  img {
+    width: 125px;
+    height: 125px;
+  }
+
+  h1 {
+    font-size: 30px;
+  }
+
+  .tagline {
+    font-size: 16px;
+  }
+
+  section {
+    margin-top: 25px;
+  }
+
+  .social a {
+    display: block;
+    margin: 10px 0;
+  }
 }
 </style>
 </head>
@@ -95,19 +177,24 @@ Aspiring AI Developer 🤖 | C++ Programmer 💻
 
 <section>
 <h2>About Me</h2>
+
 <p>
 Hello! I'm Aswin. I am interested in technology,
 programming, artificial intelligence and learning new things.
 </p>
+
 </section>
 
 <section>
 <h2>My Skills 💻</h2>
+
 <ul>
 <li>Communication</li>
 <li>C++ Programming</li>
+<li>Problem Solving</li>
 <li>Learning New Technologies</li>
 </ul>
+
 </section>
 
 <section>
@@ -119,6 +206,20 @@ and build useful AI technologies in the future.
 </div>
 
 </section>
+
+<div class="social">
+
+<h2>Connect With Me 🌐</h2>
+
+<a href="https://github.com/aswin519594" target="_blank">
+💻 GitHub
+</a>
+
+<a href="https://instagram.com/a.s.w.ii.n" target="_blank">
+📸 Instagram
+</a>
+
+</div>
 
 <footer>
 © 2026 Aswin | Personal Profile
